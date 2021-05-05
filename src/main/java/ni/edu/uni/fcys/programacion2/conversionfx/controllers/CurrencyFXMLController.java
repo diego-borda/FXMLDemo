@@ -7,7 +7,13 @@ package ni.edu.uni.fcys.programacion2.conversionfx.controllers;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
 
 /**
  * FXML Controller class
@@ -16,12 +22,30 @@ import javafx.fxml.Initializable;
  */
 public class CurrencyFXMLController implements Initializable {
 
-    /**
-     * Initializes the controller class.
-     */
+    @FXML
+    public Button btnCalcular;
+    @FXML 
+    public Button btnCancelar;
+    
+    @FXML
+    public ComboBox cmbDe;
+    @FXML
+    public ComboBox cmbA;
+    
+    @FXML
+    public TextField txtDe;
+    @FXML
+    public TextField txtA;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        ObservableList<String> Cambios = FXCollections.observableArrayList("Cordobas","Dolares","Euros");
+        cmbDe.setItems(Cambios);
+        cmbA.setItems(Cambios);
     }    
+    
+    public void CalcularAction(){
+        
+    }
     
 }

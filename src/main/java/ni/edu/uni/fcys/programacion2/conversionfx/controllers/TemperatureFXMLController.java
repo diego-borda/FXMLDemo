@@ -12,6 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import ni.edu.uni.fcys.programacion2.conversionfx.core.TemperatureConversion;
 
 /**
  * FXML Controller class
@@ -19,49 +20,81 @@ import javafx.scene.control.TextField;
  * @author Sistemas-05
  */
 public class TemperatureFXMLController implements Initializable {
+
     //botones
     @FXML
-    public Button btnCompute; 
+    public Button btnCompute;
     @FXML
     public Button btnClean;
-    
+
     //text fields
     @FXML
     public TextField txtCelcius;
-    @FXML 
+    @FXML
     public TextField txtFah;
     @FXML
     public TextField txtResult;
-    
+
     //rbtn
     @FXML
-    public RadioButton rbtnCelcius;
+    public RadioButton rbtnCelsius;
     @FXML
     public RadioButton rbtnFah;
-    
+
     //actions
     @FXML
-    public void btnComputeAction(){
-        float c, f=0;
-        if(rbtnCelcius.isSelected()){
-            c =Float.parseFloat(txtCelcius.getText());
-            f =  ((float)9/5)*c + 32;
-            
-        }
-        else if(rbtnFah.isSelected()){
+    public void btnComputeAction() {
+        float c, f = 0;
+        if (rbtnCelsius.isSelected()) {
+            c = Float.parseFloat(txtCelcius.getText());
+            f = TemperatureConversion.fromCelsiusToFahrenheit(c);
+
+        } else if (rbtnFah.isSelected()) {
             c = Float.parseFloat(txtFah.getText());
-            f = (c-32)*((float)5/9);
-            
-        }
-        else {
+            f = TemperatureConversion.fromFahrenheitToCelsius(c);
+
+        } else {
 //            JOptionPane.showMessageDialog(null,"Selecciona un radio button");
 //            return;
         }
         txtResult.setText(String.valueOf(f));
     }
+    
+
     @FXML
-    public void btnCleanAction(){
-        
+    public void btnCleanAction() {
+
+    }
+
+    @FXML
+    public void rbtnCelsiusAction() {
+        activateTextfield();
+
+    }
+
+    @FXML
+    public void rbtnFahAction() {
+        activateTextfield();
+
+    }
+
+    private void activateTextfield() {
+        if (rbtnCelsius.isSelected()) {
+            txtCelcius.setEditable(true);
+            txtCelcius.requestFocus();
+            txtFah.setEditable(false);
+        } else if (rbtnFah.isSelected()) {
+            txtFah.setEditable(true);
+            txtFah.requestFocus();
+            txtCelcius.setEditable(false);
+        }
+        cleanTextField();
+    }
+    
+    private void cleanTextField(){
+        txtCelcius.setText("");
+        txtFah.setText("");
+        txtResult.setText("");
     }
     /**
      * Initializes the controller class.
@@ -69,6 +102,6 @@ public class TemperatureFXMLController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-    
+    }
+
 }
